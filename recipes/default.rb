@@ -6,10 +6,6 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-package 'build-essential' do
-  action :install
-end
-
 execute "download" do
    command "wget http://download.redis.io/releases/redis-3.0.0.tar.gz -O /home/ec2-user/"
 end
