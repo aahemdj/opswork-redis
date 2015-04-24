@@ -14,7 +14,7 @@
 
 bash "install_redis" do
   user 'root'
-  cwd "/home/hamza"
+  cwd "/home/ec2-user"
   code <<-EOH
   wget http://download.redis.io/releases/redis-3.0.0.tar.gz
   tar -xvf redis-3.0.0.tar.gz
@@ -24,6 +24,6 @@ bash "install_redis" do
 end
 
 execute "Start Redis Server" do
-  command "nohup redis-server &"
+  command "redis-server &"
 end
 
