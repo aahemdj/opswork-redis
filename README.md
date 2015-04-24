@@ -1,0 +1,2 @@
+# opswork-redis
+cookbook redis
