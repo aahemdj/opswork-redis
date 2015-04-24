@@ -11,7 +11,12 @@ execute "download" do
 end
 
 execute "extract-tar" do
-  command "tar -xvf /home/ec2-user/redis.tar.gz /home/ec2-user/ && cd /home/ec2-user/redis-3.0.0"
+  command "tar -xvf /home/ec2-user/redis.tar.gz"
+end
+
+
+execute "Cd" do
+  command "cd /home/ec2-user/redis-*"
 end
 
 execute "Make Redis" do
