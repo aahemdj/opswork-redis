@@ -7,11 +7,11 @@
 # All rights reserved - Do Not Redistribute
 #
 execute "download" do
-   command "wget http://download.redis.io/releases/redis-3.0.0.tar.gz -O /home/ec2-user/"
+   command "wget http://download.redis.io/releases/redis-3.0.0.tar.gz -O /home/ec2-user/redis.tar.gz"
 end
 
 execute "extract-tar" do
-  command "tar -xvf /home/ec2-user/redis-3.0.0.tar.gz /home/ec2-user/ && cd /home/ec2-user/redis-3.0.0"
+  command "tar -xvf /home/ec2-user/redis.tar.gz /home/ec2-user/ && cd /home/ec2-user/redis-3.0.0"
 end
 
 execute "Make Redis" do
