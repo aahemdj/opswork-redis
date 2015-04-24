@@ -6,20 +6,21 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-package 'build-essential' do
-  action :install
-end
 
-execute "download" do
-   command "wget http://download.redis.io/releases/redis-3.0.0.tar.gz -O /home/ec2-user/"
-end
 
-execute "extract-tar" do
-  commad "tar -xvf /home/ec2-user/redis-3.0.0.tar.gz /home/ec2-user/ && cd /home/ec2-user/redis-3.0.0"
-end
+#execute "download" do
+#   command "wget http://download.redis.io/releases/redis-3.0.0.tar.gz -O /home/hamza/redis-3.0.0.tar.gz"
+#end
 
-execute "Make Redis" do
-  command "make install"
+bash "install_redis" do
+  user 'root'
+  cwd "/home/hamza"
+  code <<-EOH
+  wget http://download.redis.io/releases/redis-3.0.0.tar.gz
+  tar -xvf redis-3.0.0.tar.gz
+  cd redis-3.0.0/
+  make install
+  EOH
 end
 
 execute "Start Redis Server" do
