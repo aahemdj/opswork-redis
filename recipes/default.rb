@@ -1,34 +1,28 @@
 #
-# Cookbook Name:: redisio
+# Cookbook Name:: redis
 # Recipe:: default
 #
-# Copyright 2013, Brian Bianco <brian.bianco@gmail.com>
+# Copyright 2015, YOUR_COMPANY_NAME
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
+# All rights reserved - Do Not Redistribute
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
+package 'build-essential' do
+  action :install
+end
 
-case node.platform
-when 'debian','ubuntu'
-  %w[tar build-essential].each do |pkg|
-    package pkg do
-      action :install
-    end
-  end
-when 'redhat','centos','fedora','scientific','suse','amazon'
-  %w[tar make automake gcc].each do |pkg|
-    package pkg do
-      action :install
-      end
-  end
+execute "download" do
+   command "wget http://download.redis.io/releases/redis-3.0.0.tar.gz -O /home/ec2-user/"
+end
+
+execute "extract-tar" do
+  commad "tar -xvf /home/ec2-user/redis-3.0.0.tar.gz /home/ec2-user/ && cd /home/ec2-user/redis-3.0.0"
+end
+
+execute "Make Redis" do
+  command "make install"
+end
+
+execute "Start Redis Server" do
+  command "nohup redis-server &"
 end
 
